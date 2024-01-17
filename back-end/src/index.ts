@@ -2,6 +2,8 @@ import express, { Express, NextFunction, Request, Response } from 'express'
 import bodyParser from 'body-parser'
 import { AppDataSource } from './dataSource'
 import { ErrorInterface } from './interfaces/servertypes'
+import cookieParser from 'cookie-parser'
+import userRoutes from './routes/userRoutes'
 
 const app: Express = express()
 
@@ -14,6 +16,15 @@ AppDataSource.initialize()
   })
 
 app.use(bodyParser.json())
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+)
+
+app.use(cookieParser())
+
+app.use('/user', userRoutes)
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   const err: ErrorInterface = new Error('Not Found')

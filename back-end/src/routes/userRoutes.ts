@@ -1,4 +1,4 @@
-import { loginUserRules, registerUserRules, userValidation } from '../validation/userValidation'
+import { loginUserRules, registerUserRules } from '../validation/userValidation'
 import {
   getLogedUserController,
   loginUserController,
@@ -7,11 +7,12 @@ import {
   registerUserController
 } from '../controllers/userController'
 import express from 'express'
+import { checkValidation } from '../validation/checkValidation'
 
 const router = express.Router()
 
-router.route('/register').post(registerUserRules(), userValidation, registerUserController)
-router.route('/login').post(loginUserRules(), userValidation, loginUserController)
+router.route('/register').post(registerUserRules(), checkValidation, registerUserController)
+router.route('/login').post(loginUserRules(), checkValidation, loginUserController)
 router.route('/getUser').get(getLogedUserController)
 router.route('/refresh').post(refreshUserController)
 router.route('/logout').get(logoutUserController)

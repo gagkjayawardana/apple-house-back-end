@@ -24,7 +24,7 @@ export class Post extends BaseEntity {
   })
   postStatus: string
 
-  @Column()
+  @Column({ nullable: true })
   postFeedback: string
 
   @Column()

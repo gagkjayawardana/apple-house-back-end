@@ -1,5 +1,4 @@
-import { NextFunction, Request, Response } from 'express'
-import { body, validationResult } from 'express-validator'
+import { body } from 'express-validator'
 
 export const registerUserRules = () => {
   return [
@@ -13,13 +12,4 @@ export const registerUserRules = () => {
 
 export const loginUserRules = () => {
   return [body('email', 'Enter valid email').notEmpty().isEmail(), body('password', 'Password is required').notEmpty()]
-}
-
-export const userValidation = (req: Request, res: Response, next: NextFunction) => {
-  const errors = validationResult(req)
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() })
-  } else {
-    return next()
-  }
 }

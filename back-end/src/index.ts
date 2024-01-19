@@ -4,6 +4,8 @@ import { AppDataSource } from './dataSource'
 import { ErrorInterface } from './interfaces/servertypes'
 import cookieParser from 'cookie-parser'
 import userRoutes from './routes/userRoutes'
+import cors from 'cors'
+import postRoutes from './routes/postRoutes'
 
 const app: Express = express()
 
@@ -24,7 +26,15 @@ app.use(
 
 app.use(cookieParser())
 
+app.use(
+  cors({
+    credentials: true,
+    origin: ['http://localhost:3000', 'your-production-domain']
+  })
+)
+
 app.use('/user', userRoutes)
+app.use('/post', postRoutes)
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   const err: ErrorInterface = new Error('Not Found')

@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser'
 import userRoutes from './routes/userRoutes'
 import cors from 'cors'
 import postRoutes from './routes/postRoutes'
+import commentRoutes from './routes/commentRoutes'
 
 const app: Express = express()
 
@@ -35,6 +36,7 @@ app.use(
 
 app.use('/user', userRoutes)
 app.use('/post', postRoutes)
+app.use('/comment', commentRoutes)
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   const err: ErrorInterface = new Error('Not Found')

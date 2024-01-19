@@ -4,9 +4,11 @@ import { Post } from '../entities/postEntity'
 import { AddPostType, PostType } from './postServiceTypes'
 import Jwt, { JwtPayload } from 'jsonwebtoken'
 import { config } from '../utils/config'
+import { Comment } from '../entities/commentEntity'
 
 const postRepository = AppDataSource.getRepository(Post)
 const userRepository = AppDataSource.getRepository(User)
+const commentRepository = AppDataSource.getRepository(Comment)
 
 export const addNewPostService = async (newPost: AddPostType) => {
   try {
@@ -72,7 +74,14 @@ export const deletePostService = async (postId: number, accessToken: string) => 
       if (loggedUser) {
         const findUser = await userRepository.findOneBy({ email: loggedUser.email })
         if (findUser.userName === postUserName) {
-          return await postRepository.delete(postId)
+          const deletePost = await postRepository.delete(postId)
+          const comments = await commentRepository.findBy({ postId: postId })
+          if (comments) {
+            const deleteComments = await commentRepository.delete({ postId: postId })
+            return { deletePost, deleteComments }
+          } else {
+            return { error: 'Cannot find comments' }
+          }
         } else {
           return { error: 'You connot delete post' }
         }

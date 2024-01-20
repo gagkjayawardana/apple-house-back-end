@@ -1,5 +1,5 @@
 import { addCommentRules } from '../validation/commentValidation'
-import { addCommentController } from '../controllers/commentController'
+import { addCommentController, getAllCommentsController } from '../controllers/commentController'
 import express from 'express'
 import { checkValidation } from '../validation/checkValidation'
 import { authorization } from '../middleware/authGuards'
@@ -7,5 +7,6 @@ import { authorization } from '../middleware/authGuards'
 const router = express.Router()
 
 router.route('/addComment').post(authorization, addCommentRules(), checkValidation, addCommentController)
+router.route('/getComments').get(authorization, getAllCommentsController)
 
 export default router

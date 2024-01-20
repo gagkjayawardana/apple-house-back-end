@@ -22,3 +22,20 @@ export const addCommentService = async (data: AddCommentType) => {
     return { error: 'Comment not added' }
   }
 }
+
+export const getAllCommentsService = async () => {
+  try {
+    const allComments = await commentRepository.find({
+      order: {
+        commentId: 'ASC'
+      }
+    })
+    if (allComments) {
+      return allComments
+    } else {
+      return { error: 'Comments are not found' }
+    }
+  } catch (err) {
+    return { error: 'Comments are not found' }
+  }
+}

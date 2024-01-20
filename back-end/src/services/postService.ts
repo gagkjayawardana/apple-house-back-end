@@ -95,3 +95,20 @@ export const deletePostService = async (postId: number, accessToken: string) => 
     return { error: 'Error in delete post' }
   }
 }
+
+export const getAllPostService = async () => {
+  try {
+    const findPosts = await postRepository.find({
+      order: {
+        postId: 'ASC'
+      }
+    })
+    if (findPosts) {
+      return findPosts
+    } else {
+      return { error: 'Cannot find posts' }
+    }
+  } catch (err) {
+    return { error: 'Cannot find posts' }
+  }
+}

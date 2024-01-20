@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { addCommentService } from '../services/commentService'
+import { addCommentService, getAllCommentsService } from '../services/commentService'
 
 export const addCommentController = async (req: Request, res: Response) => {
   try {
@@ -8,5 +8,14 @@ export const addCommentController = async (req: Request, res: Response) => {
     res.status(200).json(result)
   } catch (err) {
     res.status(400).send('Comment not added')
+  }
+}
+
+export const getAllCommentsController = async (res: Response) => {
+  try {
+    const result = await getAllCommentsService()
+    res.status(200).json(result)
+  } catch (err) {
+    res.status(400).send('Cannot find comments')
   }
 }

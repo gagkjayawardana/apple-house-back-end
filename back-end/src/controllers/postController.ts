@@ -3,7 +3,8 @@ import {
   addFeedbackService,
   addNewPostService,
   changePostStatusService,
-  deletePostService
+  deletePostService,
+  getAllPostService
 } from '../services/postService'
 
 export const addNewPostController = async (req: Request, res: Response) => {
@@ -51,5 +52,14 @@ export const deletePostController = async (req: Request, res: Response) => {
     }
   } catch (err) {
     res.status(400).send('Error in post delete')
+  }
+}
+
+export const getPostController = async (res: Response) => {
+  try {
+    const result = await getAllPostService()
+    res.status(200).json(result)
+  } catch (err) {
+    res.status(400).send('Cannot find posts')
   }
 }

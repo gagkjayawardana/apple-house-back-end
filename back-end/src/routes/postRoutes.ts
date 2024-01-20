@@ -2,7 +2,8 @@ import {
   addFeedbackController,
   addNewPostController,
   changePostStatusController,
-  deletePostController
+  deletePostController,
+  getPostController
 } from '../controllers/postController'
 import express from 'express'
 import { checkValidation } from '../validation/checkValidation'
@@ -17,5 +18,6 @@ router
   .route('/changeStatus/:postId')
   .put(adminPermisions, changeStatusRules(), checkValidation, changePostStatusController)
 router.route('/deletePost/:postId').delete(authorization, deletePostController)
+router.route('/getPosts').get(authorization, getPostController)
 
 export default router

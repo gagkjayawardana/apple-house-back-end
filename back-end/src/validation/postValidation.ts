@@ -13,7 +13,7 @@ export const addFeedbackRules = () => {
 }
 
 const isValidStatus = (value: string) => {
-  return ['Approved', 'Rejected'].includes(value)
+  return ['Approved', 'Rejected'].includes(value.replace(/['"]/g, ''))
 }
 
 export const changeStatusRules = () => {

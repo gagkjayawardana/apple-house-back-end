@@ -55,7 +55,7 @@ export const deletePostController = async (req: Request, res: Response) => {
   }
 }
 
-export const getPostController = async (res: Response) => {
+export const getPostController = async (req: Request, res: Response) => {
   try {
     const result = await getAllPostService()
     res.status(200).json(result)

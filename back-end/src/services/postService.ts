@@ -43,7 +43,7 @@ export const changePostStatusService = async (postId: number, body: PostType) =>
       postRepository.merge(findPost, body)
       return await postRepository.save(findPost)
     } else {
-      return { error: 'Cannot find user' }
+      return { error: 'Cannot find post' }
     }
   } catch (err) {
     return { error: 'Status not changed' }

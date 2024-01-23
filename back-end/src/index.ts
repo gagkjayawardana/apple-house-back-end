@@ -8,7 +8,38 @@ import cors from 'cors'
 import postRoutes from './routes/postRoutes'
 import commentRoutes from './routes/commentRoutes'
 
+import { createServer } from 'http'
+import { Server } from 'socket.io'
+
 const app: Express = express()
+const httpServer = createServer(app)
+
+const io = new Server(httpServer, {
+  cors: {
+    origin: 'http://localhost:3000/',
+    methods: ['GET', 'POST', 'PUT']
+  }
+})
+
+io.on('connection', (socket) => {
+  console.log(`User connect ${socket.id}`)
+
+  socket.on('post_add', (data) => {
+    socket.broadcast.emit('post_added', data)
+  })
+
+  socket.on('approve_post', (data) => {
+    socket.broadcast.emit('approved_post', data)
+  })
+
+  socket.on('reject_post', (data) => {
+    socket.broadcast.emit('rejected_post', data)
+  })
+
+  socket.on('add_comment', (data) => {
+    socket.broadcast.emit('comment_added', data)
+  })
+})
 
 AppDataSource.initialize()
   .then(() => {
@@ -53,6 +84,6 @@ app.use((err: ErrorInterface, req: Request, res: Response) => {
   })
 })
 
-app.listen(8080, async () => {
+httpServer.listen(8080, async () => {
   console.log('Server is running at http://localhost:8080')
 })

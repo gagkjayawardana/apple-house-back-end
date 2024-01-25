@@ -13,42 +13,17 @@ Before you begin, ensure you have the following installed:
 - **main:** The default branch. It represents the stable version of the back-end code.
 
 ## Getting Started
+
 To get started with the Apple House Back-End, follow these steps:
 
 1. Clone the repository:
 
-Getting Started
-To get started with the Apple House Front-End, follow these steps:
+   https://github.com/gagkjayawardana/apple-house-back-end.git
 
-Clone the repository:
+2. Install dependencies:
 
-Getting Started
-To get started with the Apple House Front-End, follow these steps:
+   npm install
 
-Clone the repository:
+3. Start the nodemon server:
 
-https://github.com/gagkjayawardana/apple-house-front-end.git
-
-Install dependencies:
-
-npm install
-
-Start the development server:
-
-npm start
-
-Install dependencies:
-
-npm install
-
-Start the development server:
-
-npm start
-
-Install dependencies:
-
-npm install
-
-Start the development server:
-
-npm start
+   npm run dev

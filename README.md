@@ -1,1 +1,14 @@
-# apple-house-back-end
+# Apple House Back-End
+
+Welcome to the Apple House Back-End project! This project contains the back-end code for your web application developed using Express JS.
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- Node.js and npm (Node Package Manager)
+
+## Branches
+
+- **main:** The default branch. It represents the stable version of the front-end code.
+
